@@ -5,11 +5,14 @@ int main(int argc, char *argv[]) {
   // Flush after every printf
   setbuf(stdout, NULL);
 
-  // Uncomment this block to pass the first stage
+  // Uncomment this block to pass the first stages
   printf("$ ");
 
   // Wait for user input
   char input[100];
+
   fgets(input, 100, stdin);
+  printf("%s", input);
+
   return 0;
 }
