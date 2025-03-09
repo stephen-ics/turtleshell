@@ -21,8 +21,6 @@ int main(int argc, char *argv[]) {
     printf("$ ");
     fgets(input, inputSize, stdin);
 
-    printf("input %s ", input);
-
     size_t len = strlen(input);
   
     if(len > 0 && input[len - 1] == '\n') {
@@ -50,7 +48,14 @@ int main(int argc, char *argv[]) {
     }
 
     if(strcmp(echo, command) == 0) {
-      printf("%s\n", arguments[1]);
+      int count = 1;
+
+      while(arguments[count][0] != '\0') {
+        printf("%s ", arguments[count]);
+        count++;
+      }
+
+      printf("\n");
     }
 
     else {
