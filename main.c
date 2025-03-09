@@ -6,8 +6,6 @@ int main(int argc, char *argv[]) {
   // Flush after every printf
   setbuf(stdout, NULL);
 
-  // Uncomment this block to pass the first stages
-
   // Wait for user input
   char input[100];
 
@@ -15,12 +13,14 @@ int main(int argc, char *argv[]) {
     printf("$ ");
     fgets(input, 100, stdin);
 
+    char exit[] = "exit 0";
+
     size_t len = strlen(input);
     if(len > 0 && input[len - 1] == '\n') {
       input[len - 1] = '\0';
     }
 
-    if(strcmp("exit 0", input)) {
+    if(strcmp(exit, input) == 0) {
       break;
     }
 
