@@ -17,6 +17,10 @@ int main(int argc, char *argv[]) {
   while(1) {
     char exit[] = "exit 0";
     char echo[] = "echo";
+    char type[] = "type";
+
+    char commandList[][commandSize] = {"exit", "type", "echo"};
+    int commandListLength = sizeof(commandList) / sizeof(commandList[0]);
 
     printf("$ ");
     fgets(input, inputSize, stdin);
@@ -52,6 +56,28 @@ int main(int argc, char *argv[]) {
             printf("%s ", arguments[i]);
         }
         printf("\n");
+    }
+
+    else if (strcmp(type, command) == 0) {
+
+      for(int i = 1; i < argumentCount; i++) {
+        int found = 1;
+
+        char arg[50];
+        strcpy(arg, arguments[i]);
+
+        for(int j = 0; j < commandListLength; j++) {
+          if(strcmp(commandList[j], arg) == 0) {
+            printf("%s is a shell builtin\n", arg);
+            found = 0;
+            break;
+          }
+        }
+
+        if(found == 1) {
+          printf("%s: not found\n", arg);
+        }
+      }
     }
 
     else {
