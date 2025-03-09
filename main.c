@@ -7,15 +7,24 @@ int main(int argc, char *argv[]) {
   setbuf(stdout, NULL);
 
   // Wait for user input
-  char input[100];
+  const int commandSize = 50;
+  const int argumentSize = 50;
+  const int inputSize = 100;
+
+  char input[inputSize];
+
 
   while(1) {
-    printf("$ ");
-    fgets(input, 100, stdin);
-
     char exit[] = "exit 0";
+    char echo[] = "echo";
+
+    printf("$ ");
+    fgets(input, inputSize, stdin);
+
+    printf("input %s ", input);
 
     size_t len = strlen(input);
+  
     if(len > 0 && input[len - 1] == '\n') {
       input[len - 1] = '\0';
     }
@@ -24,7 +33,29 @@ int main(int argc, char *argv[]) {
       break;
     }
 
-    printf("%s: command not found \n", input);
+    char *token = strtok(input, " ");
+
+    char command[commandSize];
+    strcpy(command, token);
+
+    char arguments[argumentSize][commandSize];
+    int argumentCount = 0;
+
+    while(token != NULL) {
+      strncpy(arguments[argumentCount], token, 19);
+      arguments[argumentCount][19] = '\0';
+      argumentCount++;
+  
+      token = strtok(NULL, " ");
+    }
+
+    if(strcmp(echo, command) == 0) {
+      printf("%s\n", arguments[1]);
+    }
+
+    else {
+      printf("%s: command not found \n", input);
+    }
   }
 
   return 0;
