@@ -47,15 +47,11 @@ int main(int argc, char *argv[]) {
       token = strtok(NULL, " ");
     }
 
-    if(strcmp(echo, command) == 0) {
-      int count = 1;
-
-      while(arguments[count][0] != '\0') {
-        printf("%s ", arguments[count]);
-        count++;
-      }
-
-      printf("\n");
+    if (strcmp(echo, command) == 0) {
+        for (int i = 1; i < argumentCount; i++) {
+            printf("%s ", arguments[i]);
+        }
+        printf("\n");
     }
 
     else {
