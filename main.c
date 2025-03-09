@@ -19,7 +19,7 @@ int main(int argc, char *argv[]) {
     char echo[] = "echo";
     char type[] = "type";
 
-    char commandList[][commandSize] = {"exit", "type", "echo"};
+    char commandList[][50] = {"exit", "type", "echo"};
     int commandListLength = sizeof(commandList) / sizeof(commandList[0]);
 
     printf("$ ");
