@@ -6,20 +6,29 @@ int main(int argc, char *argv[]) {
   // Flush after every printf
   setbuf(stdout, NULL);
 
+  char *fullPath = getenv("PATH");
+  char copyPath[strlen(fullPath) + 1];
+
+  strcpy(copyPath, fullPath);
+
+  char* pathPointer = strtok(copyPath, ":");
+  char path[strlen(fullPath) + 1];
+
+  strcpy(path, pathPointer);
+
   // Wait for user input
-  const int commandSize = 50;
-  const int argumentSize = 50;
+  const int commandSize = 100;
+  const int argumentSize = 100;
   const int inputSize = 100;
 
   char input[inputSize];
-
 
   while(1) {
     char exit[] = "exit 0";
     char echo[] = "echo";
     char type[] = "type";
 
-    char commandList[][50] = {"exit", "type", "echo"};
+    char commandList[][50] = {"exit", "type", "echo", "ls"};
     int commandListLength = sizeof(commandList) / sizeof(commandList[0]);
 
     printf("$ ");
@@ -44,8 +53,8 @@ int main(int argc, char *argv[]) {
     int argumentCount = 0;
 
     while(token != NULL) {
-      strncpy(arguments[argumentCount], token, 19);
-      arguments[argumentCount][19] = '\0';
+      strncpy(arguments[argumentCount], token, 99);
+      arguments[argumentCount][99] = '\0';
       argumentCount++;
   
       token = strtok(NULL, " ");
@@ -68,7 +77,7 @@ int main(int argc, char *argv[]) {
 
         for(int j = 0; j < commandListLength; j++) {
           if(strcmp(commandList[j], arg) == 0) {
-            printf("%s is a shell builtin\n", arg);
+            printf("%s is %s/%s", arg, path, arg);
             found = 0;
             break;
           }
