@@ -3,23 +3,22 @@
 #include <string.h>
 
 int main(int argc, char *argv[]) {
-  // Flush after every printf
   setbuf(stdout, NULL);
-
-  // Uncomment this block to pass the first stages
-  printf("$ ");
 
   // Wait for user input
   char input[100];
 
-  fgets(input, 100, stdin);
+  while(1) {
+    printf("$ ");
+    fgets(input, 100, stdin);
 
-  size_t len = strlen(input);
-  if(len > 0 && input[len - 1] == '\n') {
-    input[len - 1] = '\0';
+    size_t len = strlen(input);
+    if(len > 0 && input[len - 1] == '\n') {
+      input[len - 1] = '\0';
+    }
+
+    printf("%s: command not found \n", input);
   }
-
-  printf("%s: command not found", input);
 
   return 0;
 }
